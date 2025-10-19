@@ -29,13 +29,30 @@ jobs:
             using Pkg
             Pkg.activate(".")
             pkg = basename(pwd())
+            
             # Always develop TheForce for dependents
-            if pkg != "TheForce"; Pkg.develop(path=joinpath(pwd(), "..", "TheForce")); end
+            if pkg != "TheForce"
+              Pkg.develop(path=joinpath(pwd(), "..", "TheForce"))
+            end
+            
+            # For StarWarsApp, develop all dependencies BEFORE instantiate
             if pkg == "StarWarsApp"
               Pkg.develop(path=joinpath(pwd(), "..", "TheEmpire"))
               Pkg.develop(path=joinpath(pwd(), "..", "TheResistance"))
             end
+            
+            # For TheEmpire and TheResistance, they might need each other
+            if pkg == "TheEmpire"
+              # Add any TheEmpire-specific dependencies here if needed
+            end
+            if pkg == "TheResistance"  
+              # Add any TheResistance-specific dependencies here if needed
+            end
+            
+            # Add Coverage for LCOV generation
             Pkg.add("Coverage")
+            
+            # Instantiate AFTER developing local packages
             Pkg.instantiate()
           '
 
