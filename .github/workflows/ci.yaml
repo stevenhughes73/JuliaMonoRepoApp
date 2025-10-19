@@ -29,31 +29,34 @@ jobs:
             using Pkg
             Pkg.activate(".")
             pkg = basename(pwd())
+            println("Setting up dependencies for: ", pkg)
             
             # Always develop TheForce for dependents
             if pkg != "TheForce"
+              println("Developing TheForce...")
               Pkg.develop(path=joinpath(pwd(), "..", "TheForce"))
+              println("TheForce developed successfully")
             end
             
             # For StarWarsApp, develop all dependencies BEFORE instantiate
             if pkg == "StarWarsApp"
+              println("Developing TheEmpire...")
               Pkg.develop(path=joinpath(pwd(), "..", "TheEmpire"))
+              println("TheEmpire developed successfully")
+              
+              println("Developing TheResistance...")
               Pkg.develop(path=joinpath(pwd(), "..", "TheResistance"))
-            end
-            
-            # For TheEmpire and TheResistance, they might need each other
-            if pkg == "TheEmpire"
-              # Add any TheEmpire-specific dependencies here if needed
-            end
-            if pkg == "TheResistance"  
-              # Add any TheResistance-specific dependencies here if needed
+              println("TheResistance developed successfully")
             end
             
             # Add Coverage for LCOV generation
+            println("Adding Coverage...")
             Pkg.add("Coverage")
             
             # Instantiate AFTER developing local packages
+            println("Running instantiate...")
             Pkg.instantiate()
+            println("Setup complete!")
           '
 
       - name: Debug info
