@@ -40,6 +40,7 @@ t = Template(;
         Develop(),
         CompatHelper(),          # helps manage [compat] entries
     ],
+    git = false  # <-- ADD THIS! Prevents Git repo creation
 )
 ```
 

@@ -35,6 +35,7 @@ jobs:
               Pkg.develop(path=joinpath(pwd(), "..", "TheEmpire"))
               Pkg.develop(path=joinpath(pwd(), "..", "TheResistance"))
             end
+            Pkg.add("Coverage")
             Pkg.instantiate()
           '
 
