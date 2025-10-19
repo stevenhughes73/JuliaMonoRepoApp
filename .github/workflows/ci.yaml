@@ -91,3 +91,29 @@ jobs:
         with:
           name: lcov-${{ matrix.pkg }}
           path: lcov-${{ matrix.pkg }}.info
+        
+  coverage:
+    name: aggregate-coverage
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Download all coverage artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: coverage-files
+          
+      - name: Combine coverage files
+        run: |
+          # Create combined LCOV file
+          find coverage-files -name "*.info" -exec cat {} \; > combined-coverage.info
+          echo "Combined coverage file created"
+          ls -la combined-coverage.info
+          
+      - name: Upload to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          file: combined-coverage.info
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true
