@@ -44,6 +44,8 @@ t = Template(;
 )
 ```
 
+TODO, when testing this approach make sure only a package was created, no repo.
+
 move in tests and docs code into module file and runtests.jl. 
 
 
@@ -187,3 +189,69 @@ julia> battle()
 ```
 
 # Set up Github workflows
+
+## Main runner
+
+## Coverage token
+
+## Readme badge
+
+```markdown
+
+# Julia Monorepo App
+
+[![CI](https://github.com/stevenhughes73/JuliaMonoRepoApp/workflows/CI/badge.svg)](https://github.com/stevenhughes73/JuliaMonoRepoApp/actions)
+[![codecov](https://codecov.io/gh/stevenhughes73/JuliaMonoRepoApp/branch/main/graph/badge.svg)](https://codecov.io/gh/stevenhughes73/JuliaMonoRepoApp)
+
+A Star Wars themed Julia monorepo demonstration.
+
+## Packages
+
+- **TheForce** - Base package with core Force functionality
+- **TheEmpire** - Sith lords and TIE fighters  
+- **TheResistance** - Jedi and X-wing fighters
+- **StarWarsApp** - Main application orchestrating epic battles
+
+## Usage
+
+```julia
+using StarWarsApp
+result = battle()  # Returns :resistance_wins
+```
+
+## Development
+```
+
+# Documentation
+
+## Step 1
+
+- made docs\src folder in main repo and in modules (module docs folders should have been set up with template)
+
+## Step 2 Root Launch Pad Documentation
+
+```julia
+
+using Documenter
+
+makedocs(;
+    sitename="Julia Monorepo App - Documentation Hub",
+    format=Documenter.HTML(;
+        prettyurls=get(ENV, "CI", "false") == "true",
+        canonical="https://stevenhughes73.github.io/JuliaMonoRepoApp",
+    ),
+    pages=[
+        "Documentation Hub" => "index.md",
+    ],
+)
+
+deploydocs(;
+    repo="github.com/stevenhughes73/JuliaMonoRepoApp",
+    devbranch="main",
+)
+```
+
+
+
+
+
