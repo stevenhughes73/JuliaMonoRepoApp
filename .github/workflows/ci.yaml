@@ -31,14 +31,26 @@ jobs:
             pkg = basename(pwd())
             println("Setting up dependencies for: ", pkg)
             
-            # Always develop TheForce for dependents
+            # For StarWarsApp, remove existing local package deps first
+            if pkg == "StarWarsApp"
+              println("Removing existing local package dependencies...")
+              for dep in ["TheForce", "TheEmpire", "TheResistance"]
+                try
+                  Pkg.rm(dep)
+                  println("Removed ", dep)
+                catch e
+                  println("Could not remove ", dep, ": ", e)
+                end
+              end
+            end
+            
+            # Now develop local packages
             if pkg != "TheForce"
               println("Developing TheForce...")
               Pkg.develop(path=joinpath(pwd(), "..", "TheForce"))
               println("TheForce developed successfully")
             end
             
-            # For StarWarsApp, develop all dependencies BEFORE instantiate
             if pkg == "StarWarsApp"
               println("Developing TheEmpire...")
               Pkg.develop(path=joinpath(pwd(), "..", "TheEmpire"))
