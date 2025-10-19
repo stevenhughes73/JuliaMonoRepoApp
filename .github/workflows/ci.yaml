@@ -122,8 +122,33 @@ jobs:
         run: |
           julia --project=docs -e '
             using Pkg
+            
+            # Remove any existing local package deps from docs Project.toml
+            for dep in ["TheForce", "TheEmpire", "TheResistance"]
+              try
+                Pkg.rm(dep)
+                println("Removed ", dep)
+              catch e
+                println("Could not remove ", dep, ": ", e)
+              end
+            end
+            
+            # Develop all local packages in dependency order
+            println("Developing TheForce...")
+            Pkg.develop(PackageSpec(path="TheForce"))
+            
+            println("Developing TheEmpire...")
+            Pkg.develop(PackageSpec(path="TheEmpire"))
+            
+            println("Developing TheResistance...")
+            Pkg.develop(PackageSpec(path="TheResistance"))
+            
+            println("Developing StarWarsApp...")
             Pkg.develop(PackageSpec(path="StarWarsApp"))
+            
+            println("Running instantiate...")
             Pkg.instantiate()
+            println("Docs setup complete!")
           '
           
       - name: Build and deploy docs
