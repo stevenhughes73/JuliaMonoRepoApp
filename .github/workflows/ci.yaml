@@ -39,7 +39,7 @@ jobs:
           '
 
       - name: Test with coverage
-        run: julia --project=. --code-coverage=user -e 'using Pkg; Pkg.test(coverage=true)'
+        run: julia --project=. --code-coverage=user -e 'using Pkg; Pkg.test("${{ matrix.pkg }}", coverage=true)'
 
       - name: LCOV artifact
         run: julia --project=. -e 'using Coverage; LCOV.writefile(joinpath(ENV["GITHUB_WORKSPACE"], "lcov-${{ matrix.pkg }}.info"), process_folder("src"))'
