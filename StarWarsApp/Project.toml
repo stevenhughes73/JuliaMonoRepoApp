@@ -1,0 +1,20 @@
+name = "StarWarsApp"
+uuid = "9e9c970d-5cde-4c9d-ae05-2c853ea3e8c7"
+authors = ["Steve Hughes"]
+version = "1.0.0-DEV"
+
+[deps]
+Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
+TheEmpire = "3a12aa5e-8679-4092-9db9-84c11926f01c"
+TheForce = "fbee0d66-0c7b-49c9-8172-283e09681d64"
+TheResistance = "d4619794-f4bb-4f52-8e36-759f60778f40"
+
+[compat]
+Reexport = "1.2.2"
+julia = "1.6.7"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
