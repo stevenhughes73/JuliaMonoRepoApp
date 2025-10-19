@@ -1,0 +1,5 @@
+[deps]
+StarWarsApp = "9e9c970d-5cde-4c9d-ae05-2c853ea3e8c7"
+TheEmpire = "3a12aa5e-8679-4092-9db9-84c11926f01c"
+TheForce = "fbee0d66-0c7b-49c9-8172-283e09681d64"
+TheResistance = "d4619794-f4bb-4f52-8e36-759f60778f40"

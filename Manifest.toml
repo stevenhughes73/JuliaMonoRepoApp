@@ -1,0 +1,33 @@
+# This file is machine-generated - editing it directly is not advised
+
+julia_version = "1.11.3"
+manifest_format = "2.0"
+project_hash = "df1054b304d56d4e978766efdccb7ad643906748"
+
+[[deps.Reexport]]
+git-tree-sha1 = "45e428421666073eab6f2da5c9d310d99bb12f9b"
+uuid = "189a3867-3050-52da-a836-e630ba90ab69"
+version = "1.2.2"
+
+[[deps.StarWarsApp]]
+deps = ["Reexport", "TheEmpire", "TheForce", "TheResistance"]
+path = "StarWarsApp"
+uuid = "9e9c970d-5cde-4c9d-ae05-2c853ea3e8c7"
+version = "1.0.0-DEV"
+
+[[deps.TheEmpire]]
+deps = ["Reexport", "TheForce"]
+path = "TheEmpire"
+uuid = "3a12aa5e-8679-4092-9db9-84c11926f01c"
+version = "1.0.0-DEV"
+
+[[deps.TheForce]]
+path = "TheForce"
+uuid = "fbee0d66-0c7b-49c9-8172-283e09681d64"
+version = "1.0.0-DEV"
+
+[[deps.TheResistance]]
+deps = ["Reexport", "TheForce"]
+path = "TheResistance"
+uuid = "d4619794-f4bb-4f52-8e36-759f60778f40"
+version = "1.0.0-DEV"
