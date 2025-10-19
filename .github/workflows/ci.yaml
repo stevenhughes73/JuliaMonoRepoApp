@@ -38,9 +38,19 @@ jobs:
             Pkg.instantiate()
           '
 
+      - name: Debug info
+        run: |
+          echo "Current directory: $(pwd)"
+          echo "Contents of current directory:"
+          ls -la
+          echo "Project.toml contents:"
+          cat Project.toml
+          echo "Package name check:"
+          julia --project=. -e 'using Pkg; println("Project name: ", Pkg.project().name); println("Project UUID: ", Pkg.project().uuid)'
+
       - name: Test with coverage
         run: julia --project=. --code-coverage=user -e 'using Pkg; Pkg.test(coverage=true)'
-        
+
       - name: LCOV artifact
         run: julia --project=. -e 'using Coverage; LCOV.writefile(joinpath(ENV["GITHUB_WORKSPACE"], "lcov-${{ matrix.pkg }}.info"), process_folder("src"))'
         
