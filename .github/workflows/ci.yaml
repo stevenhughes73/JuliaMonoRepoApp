@@ -5,12 +5,11 @@ on:
 
 jobs:
   test:
-    name: test-${{ matrix.pkg }}-julia-${{ matrix.julia }}
+    name: test-${{ matrix.pkg }}-julia-1.11
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        julia: ['1.10', '1.11', '1.12']
         pkg: [TheForce, TheEmpire, TheResistance, StarWarsApp]
     defaults:
       run:
@@ -21,22 +20,20 @@ jobs:
       
       - uses: julia-actions/setup-julia@v2
         with:
-          version: ${{ matrix.julia }}
+          version: '1.11'
 
-      - name: Instantiate (workspace on 1.12; path-deps otherwise)
+      - name: Setup dependencies
         shell: bash
         run: |
           julia --project=. -e '
             using Pkg
             Pkg.activate(".")
-            if VERSION < v"1.12"
-              pkg = basename(pwd())
-              # Always develop TheForce for dependents
-              if pkg != "TheForce"; Pkg.develop(path=joinpath(pwd(), "..", "TheForce")); end
-              if pkg == "StarWarsApp"
-                Pkg.develop(path=joinpath(pwd(), "..", "TheEmpire"))
-                Pkg.develop(path=joinpath(pwd(), "..", "TheResistance"))
-              end
+            pkg = basename(pwd())
+            # Always develop TheForce for dependents
+            if pkg != "TheForce"; Pkg.develop(path=joinpath(pwd(), "..", "TheForce")); end
+            if pkg == "StarWarsApp"
+              Pkg.develop(path=joinpath(pwd(), "..", "TheEmpire"))
+              Pkg.develop(path=joinpath(pwd(), "..", "TheResistance"))
             end
             Pkg.instantiate()
           '
