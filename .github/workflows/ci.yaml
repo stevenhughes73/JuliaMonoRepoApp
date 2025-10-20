@@ -161,6 +161,7 @@ jobs:
   docs-theforce:
     name: docs-theforce
     runs-on: ubuntu-latest
+    needs: docs 
     permissions:
       contents: write
     steps:
