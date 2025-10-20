@@ -4,8 +4,8 @@ using TheForce
 makedocs(;
     modules=[TheForce],
     sitename="TheForce.jl",
-    source="docs/src",
-    build="docs/build",
+    source="src",          # Change from "docs/src" to just "src"
+    build="build",         # Change from "docs/build" to just "build"
     checkdocs=:none,
     format=Documenter.HTML(;
         prettyurls=get(ENV, "CI", "false") == "true",
