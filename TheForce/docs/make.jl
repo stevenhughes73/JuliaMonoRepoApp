@@ -1,23 +1,25 @@
-using TheForce
 using Documenter
-
-DocMeta.setdocmeta!(TheForce, :DocTestSetup, :(using TheForce); recursive=true)
+using TheForce
 
 makedocs(;
     modules=[TheForce],
-    authors="Steve Hughes",
     sitename="TheForce.jl",
+    source="docs/src",
+    build="docs/build",
+    checkdocs=:none,
     format=Documenter.HTML(;
-        canonical="https://stevenhughes73.github.io/TheForce.jl",
-        edit_link="master",
-        assets=String[],
+        prettyurls=get(ENV, "CI", "false") == "true",
+        canonical="https://stevenhughes73.github.io/JuliaMonoRepoApp/theforce",
     ),
     pages=[
         "Home" => "index.md",
+        "API Reference" => "api.md",
     ],
 )
 
 deploydocs(;
-    repo="github.com/stevenhughes73/TheForce.jl",
-    devbranch="master",
+    repo="github.com/stevenhughes73/JuliaMonoRepoApp",
+    devbranch="main",
+    target="build",
+    dirname="theforce"
 )

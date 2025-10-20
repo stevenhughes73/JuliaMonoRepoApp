@@ -157,3 +157,36 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: julia --project=docs docs/make.jl
+
+  docs-theforce:
+    name: docs-theforce
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: julia-actions/setup-julia@v2
+        with:
+          version: '1.11'
+          
+      - name: Install dependencies
+        working-directory: TheForce
+        run: |
+          julia --project=docs -e '
+            using Pkg
+            
+            # Develop TheForce in the docs environment
+            println("Developing TheForce...")
+            Pkg.develop(PackageSpec(path=".."))
+            
+            println("Running instantiate...")
+            Pkg.instantiate()
+            println("TheForce docs setup complete!")
+          '
+          
+      - name: Build and deploy docs
+        working-directory: TheForce
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: julia --project=docs docs/make.jl
