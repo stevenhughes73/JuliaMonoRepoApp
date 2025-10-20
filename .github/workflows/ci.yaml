@@ -178,7 +178,7 @@ jobs:
             
             # Develop TheForce in the docs environment
             println("Developing TheForce...")
-            Pkg.develop(PackageSpec(path=".."))
+            Pkg.develop(PackageSpec(path="."))
             
             println("Running instantiate...")
             Pkg.instantiate()
