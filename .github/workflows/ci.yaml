@@ -150,3 +150,8 @@ jobs:
             Pkg.instantiate()
             println("Docs setup complete!")
           '
+
+      - name: Build and deploy docs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: julia --project=docs docs/make.jl
