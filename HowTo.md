@@ -230,6 +230,7 @@ result = battle()  # Returns :resistance_wins
 
 ## Step 2 Root Launch Pad Documentation
 
+from mono repo docs\src
 ```julia
 
 using Documenter

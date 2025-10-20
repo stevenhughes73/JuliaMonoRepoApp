@@ -108,3 +108,45 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
 
+  docs:
+    name: documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: julia-actions/setup-julia@v2
+        with:
+          version: '1.11'
+          
+      - name: Install dependencies
+        run: |
+          julia --project=docs -e '
+            using Pkg
+            
+            # Only keep Documenter, remove any local packages if they exist
+            for dep in ["TheForce", "TheEmpire", "TheResistance", "StarWarsApp"]
+              try
+                Pkg.rm(dep)
+                println("Removed ", dep)
+              catch e
+                println("Could not remove ", dep, ": ", e)
+              end
+            end
+            
+            # Develop all local packages in dependency order
+            println("Developing TheForce...")
+            Pkg.develop(PackageSpec(path="TheForce"))
+            
+            println("Developing TheEmpire...")
+            Pkg.develop(PackageSpec(path="TheEmpire"))
+            
+            println("Developing TheResistance...")
+            Pkg.develop(PackageSpec(path="TheResistance"))
+            
+            println("Developing StarWarsApp...")
+            Pkg.develop(PackageSpec(path="StarWarsApp"))
+            
+            println("Running instantiate...")
+            Pkg.instantiate()
+            println("Docs setup complete!")
+          '
