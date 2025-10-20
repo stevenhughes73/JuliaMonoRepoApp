@@ -6,7 +6,7 @@ Welcome to the documentation for the Julia Monorepo App project.
 
 | Package | Description | Status |
 |---------|-------------|--------|
-| **TheForce** | Base package with core Force functionality | [View Docs](theforce/) |
+| **TheForce** | Base package with core Force functionality | [View Docs](https://stevenhughes73.github.io/JuliaMonoRepoApp/theforce/) |
 | **TheEmpire** | Sith lords and TIE fighters | Coming Soon |
 | **TheResistance** | Jedi and X-wing fighters | Coming Soon |
 | **StarWarsApp** | Main application orchestrating epic battles | Coming Soon |
