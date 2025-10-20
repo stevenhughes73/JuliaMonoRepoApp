@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/stevenhughes73/JuliaMonoRepoApp/workflows/CI/badge.svg)](https://github.com/stevenhughes73/JuliaMonoRepoApp/actions)
 [![codecov](https://codecov.io/gh/stevenhughes73/JuliaMonoRepoApp/branch/main/graph/badge.svg)](https://codecov.io/gh/stevenhughes73/JuliaMonoRepoApp)
+[![Documentation](https://img.shields.io/badge/docs-stable-blue.svg)](https://stevenhughes73.github.io/JuliaMonoRepoApp/)
 
 A Star Wars themed Julia monorepo demonstration.
 
